@@ -3,7 +3,7 @@ from bugtracker.serializers import AppSerializer, UserSerializer, BugSerializer,
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
-from bugtracker.permissions import IsOwnerOrReadOnly
+from bugtracker.permissions import IsOwnerOrReadOnly, IsOwnerOrTeamMembersInApp
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -30,8 +30,7 @@ class AppViewSet(viewsets.ModelViewSet):
     """
     queryset = App.objects.all()
     serializer_class = AppSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsOwnerOrTeamMembersInApp]
 
     
     def perform_create(self, serializer):

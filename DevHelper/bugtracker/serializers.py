@@ -20,6 +20,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['url', 'id', 'username', 'apps_owned', 'apps_member']
+        
 
 
 class BugSerializer(serializers.HyperlinkedModelSerializer):
